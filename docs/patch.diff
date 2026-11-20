@@ -1,0 +1,18 @@
+diff --git "a/F:\\\346\226\207\346\241\243\\voided-items-j510-patch\\docs\\rendering.orig.lua" "b/F:\\\346\226\207\346\241\243\\voided-items-j510-patch\\patch\\rendering.lua"
+index ad31334..8084e76 100644
+--- "a/F:\\\346\226\207\346\241\243\\voided-items-j510-patch\\docs\\rendering.orig.lua"
++++ "b/F:\\\346\226\207\346\241\243\\voided-items-j510-patch\\patch\\rendering.lua"
+@@ -98,10 +98,8 @@ VoidedItems:AddCallback(ModCallbacks.MC_POST_RENDER, function(_)
+     for _, sprite in pairs(VoidedItems.itemSprites) do
+         UpdateSpriteColor(sprite)
+     end
+-end)
+-
+-VoidedItems:AddCallback(ModCallbacks.MC_GET_SHADER_PARAMS, function(_, shaderName)
+-    if shaderName == "PauseScreenCompletionMarks" and Game():GetHUD():IsVisible() then
++    -- J510 起不再注册同名着色器（会导致画面全黑），HUD 图标改在普通渲染回调绘制。
++    if Game():GetHUD():IsVisible() then
+         VoidedItems:RenderItems()
+     end
+ end)
+\ No newline at end of file
